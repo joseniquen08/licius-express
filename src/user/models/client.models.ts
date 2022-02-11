@@ -3,6 +3,7 @@ import mongoose, { Types } from 'mongoose';
 const Schema = mongoose.Schema;
 
 export interface IClient {
+  _id: Types.ObjectId;
   user_id: Types.ObjectId;
   profile: {
     first_name: string;
