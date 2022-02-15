@@ -1,12 +1,15 @@
 import dotenv from 'dotenv';
 import express, { Application, NextFunction, Request, Response } from 'express';
 import userRoutes from './user/routes/user.routes';
+const cors = require('cors');
 
 dotenv.config();
 
 const app: Application = express();
 
 app.use(express.json());
+
+app.use(cors());
 
 app.use(userRoutes);
 

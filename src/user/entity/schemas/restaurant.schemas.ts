@@ -1,17 +1,9 @@
-import mongoose, { Types } from 'mongoose';
+import mongoose from 'mongoose';
+import { ILocationRestaurant, IRestaurant, ISchedule } from '../types/restaurant.types';
 
 const Schema = mongoose.Schema;
 
-export interface ISchedule {
-  day: string;
-  isOpen: boolean;
-  open_at: Date;
-  close_at: Date;
-  created_at: Date;
-  modified_at: Date;
-}
-
-const ScheduleSchema = new Schema<ISchedule>({
+export const ScheduleSchema = new Schema<ISchedule>({
   day: {
     type: String,
     required: true
@@ -35,23 +27,7 @@ const ScheduleSchema = new Schema<ISchedule>({
   }
 });
 
-export interface ILocationRestaurant {
-  title: string,
-  description: string,
-  img_url: string,
-  address: string,
-  city: string,
-  country: string,
-  phone_number: string,
-  latitude: string,
-  longitude: string,
-  tags: Types.Array<string>,
-  schedule: Types.DocumentArray<ISchedule>,
-  created_at: Date,
-  modified_at: Date
-}
-
-const LocationRestaurantSchema = new Schema<ILocationRestaurant>({
+export const LocationRestaurantSchema = new Schema<ILocationRestaurant>({
   title: {
     type: String,
     required: true
@@ -101,33 +77,14 @@ const LocationRestaurantSchema = new Schema<ILocationRestaurant>({
   }
 });
 
-export interface IRestaurant {
-  user_id: Types.ObjectId;
-  category_id: Types.ObjectId;
-  profile: {
-    nombre_comercial: String;
-    razon_social: String;
-    ruc: String;
-    email: String;
-    address: String;
-    city: String;
-    country: String;
-    description: String;
-    logo_url: String;
-    created_at: Date;
-    modified_at: Date;
-  }
-  locations: Types.DocumentArray<ILocationRestaurant>;
-}
-
-const RestaurantSchema = new Schema({
+export const RestaurantSchema = new Schema<IRestaurant>({
   user_id: {
     type: Schema.Types.ObjectId,
-    ref: 'User',
+    ref: 'Restaurant',
     required: true
   },
   category_id: {
-    type: Schema.Types.ObjectId,
+    type: Number,
     ref: 'Category',
     required: true
   },
@@ -144,22 +101,14 @@ const RestaurantSchema = new Schema({
       type: String,
       required: true
     },
-    email: {
-      type: String,
-      required: true,
-      unique: true
-    },
     address: {
-      type: String,
-      required: true
+      type: String
     },
     city: {
-      type: String,
-      required: true
+      type: String
     },
     country: {
-      type: String,
-      required: true
+      type: String
     },
     description: {
       type: String,
@@ -180,5 +129,3 @@ const RestaurantSchema = new Schema({
     type: [LocationRestaurantSchema]
   }
 });
-
-export const RestaurantModel = mongoose.model<IRestaurant>('Restaurant', RestaurantSchema);

@@ -1,27 +1,12 @@
-import mongoose, { Types } from 'mongoose';
+import mongoose from 'mongoose';
+import { IClient } from '../types/client.types';
 
 const Schema = mongoose.Schema;
 
-export interface IClient {
-  _id: Types.ObjectId;
-  user_id: Types.ObjectId;
-  profile: {
-    first_name: string;
-    last_name: string;
-    phone_number: string;
-    address: string;
-    city: string;
-    country: string;
-    description: string;
-    created_at: Date;
-    modified_at: Date;
-  };
-}
-
-const ClientSchema = new Schema<IClient>({
+export const ClientSchema = new Schema<IClient>({
   user_id: {
     type: Schema.Types.ObjectId,
-    ref: 'User',
+    ref: 'Client',
     required: true
   },
   profile: {
@@ -57,5 +42,3 @@ const ClientSchema = new Schema<IClient>({
     }
   }
 });
-
-export const ClientModel = mongoose.model<IClient>('Client', ClientSchema);

@@ -1,17 +1,9 @@
-import mongoose, { Types } from 'mongoose';
+import mongoose from 'mongoose';
+import { IUser } from "../types/user.types";
 
 const Schema = mongoose.Schema;
 
-export interface IUser {
-  _id: Types.ObjectId;
-  email: string;
-  password: string;
-  role: number;
-  created_at: Date;
-  modified_at: Date;
-}
-
-const UserSchema = new Schema<IUser>({
+export const UserSchema = new Schema<IUser>({
   email: {
     type: String,
     required: true,
@@ -33,5 +25,3 @@ const UserSchema = new Schema<IUser>({
     type:Date
   }
 });
-
-export const UserModel = mongoose.model<IUser>('User', UserSchema);
