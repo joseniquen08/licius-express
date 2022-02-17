@@ -1,31 +1,12 @@
 import { Types } from "mongoose";
 
-export type restaurantRequest = {
-  _id?: Types.ObjectId;
-  user_id: Types.ObjectId;
-  category_id: number | undefined;
-  profile : {
-    razon_social: string | undefined;
-    ruc: string | undefined;
-    nombre_comercial: string | undefined;
-    description: string | undefined;
-    address?: string;
-    city?: string;
-    country?: string;
-    logo_url?: string;
-    created_at?: Date;
-    modified_at?: Date;
-  },
-  locations?: Types.DocumentArray<ILocationRestaurant>
-}
-
 export interface ISchedule {
   day: string;
   isOpen: boolean;
   open_at: Date;
   close_at: Date;
   created_at: Date;
-  modified_at: Date;
+  updated_at: Date;
 }
 
 export interface ILocationRestaurant {
@@ -41,7 +22,7 @@ export interface ILocationRestaurant {
   tags: Types.Array<string>,
   schedule: Types.DocumentArray<ISchedule>,
   created_at: Date,
-  modified_at: Date
+  updated_at: Date
 }
 
 export interface IRestaurant {
@@ -49,16 +30,35 @@ export interface IRestaurant {
   user_id: Types.ObjectId;
   category_id: Number;
   profile: {
-    nombre_comercial: String;
-    razon_social: String;
-    ruc: String;
-    address: String;
-    city: String;
-    country: String;
-    description: String;
-    logo_url: String;
+    nombre_comercial: string;
+    razon_social: string;
+    ruc: string;
+    address: string;
+    city: string;
+    country: string;
+    description: string;
+    logo_url: string;
     created_at: Date;
-    modified_at: Date;
+    updated_at: Date;
   }
   locations: Types.DocumentArray<ILocationRestaurant>;
+}
+
+export type restaurantRequest = {
+  _id?: Types.ObjectId;
+  user_id: Types.ObjectId;
+  category_id: number | undefined;
+  profile : {
+    razon_social: string | undefined;
+    ruc: string | undefined;
+    nombre_comercial: string | undefined;
+    description: string | undefined;
+    address?: string;
+    city?: string;
+    country?: string;
+    logo_url?: string;
+    created_at?: Date;
+    updated_at?: Date;
+  },
+  locations?: Types.DocumentArray<ILocationRestaurant>
 }

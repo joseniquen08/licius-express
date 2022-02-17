@@ -18,13 +18,11 @@ export const ScheduleSchema = new Schema<ISchedule>({
   close_at: {
     type: Date
   },
-  created_at: {
-    type: Date,
-    default: new Date()
+}, {
+  timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
   },
-  modified_at: {
-    type: Date
-  }
 });
 
 export const LocationRestaurantSchema = new Schema<ILocationRestaurant>({
@@ -68,64 +66,60 @@ export const LocationRestaurantSchema = new Schema<ILocationRestaurant>({
   schedule: {
     type: [ScheduleSchema]
   },
-  created_at: {
-    type: Date,
-    default: new Date()
+}, {
+  timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
   },
-  modified_at: {
-    type: Date
-  }
 });
 
 export const RestaurantSchema = new Schema<IRestaurant>({
   user_id: {
     type: Schema.Types.ObjectId,
     ref: 'Restaurant',
-    required: true
+    required: true,
   },
   category_id: {
     type: Number,
     ref: 'Category',
-    required: true
+    required: true,
   },
   profile: {
     nombre_comercial: {
       type: String,
-      required: true
+      required: true,
     },
     razon_social: {
       type: String,
-      required: true
+      required: true,
     },
     ruc: {
       type: String,
-      required: true
+      required: true,
     },
     address: {
-      type: String
+      type: String,
     },
     city: {
-      type: String
+      type: String,
     },
     country: {
-      type: String
+      type: String,
     },
     description: {
       type: String,
-      required: true
+      required: true,
     },
     logo_url: {
-      type: String
+      type: String,
     },
-    created_at: {
-      type: Date,
-      default: new Date()
-    },
-    modified_at: {
-      type: Date
-    }
   },
   locations: {
-    type: [LocationRestaurantSchema]
-  }
+    type: [LocationRestaurantSchema],
+  },
+}, {
+  timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
+  },
 });

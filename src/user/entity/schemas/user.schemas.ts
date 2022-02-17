@@ -17,11 +17,9 @@ export const UserSchema = new Schema<IUser>({
     type: Number,
     required: true
   },
-  created_at: {
-    type: Date,
-    default: new Date()
+}, {
+  timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
   },
-  modified_at: {
-    type:Date
-  }
 });

@@ -1,10 +1,10 @@
 import { ApplicationError } from "../../shared/customErrors/ApplicationError";
 import { createAny } from "../../shared/factory/createAny";
 import { UserModel } from '../entity/models/user.models';
-import { IUser, userRequest } from '../entity/types/user.types';
+import { createUser, IUser } from '../entity/types/user.types';
 import { encryptText } from "../utils/encrypt.utils";
 
-export const createUserService = async (userRequest: userRequest): Promise<IUser> => {
+export const createUserService = async (userRequest: createUser): Promise<IUser> => {
   try {
     userRequest.password = await encryptText(userRequest.password);
     const user = await createAny(UserModel)(userRequest);

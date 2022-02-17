@@ -33,12 +33,10 @@ export const ClientSchema = new Schema<IClient>({
     description: {
       type: String
     },
-    created_at: {
-      type: Date,
-      default: Date.now()
-    },
-    modified_at: {
-      type: Date
-    }
-  }
+  },
+}, {
+  timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
+  },
 });
