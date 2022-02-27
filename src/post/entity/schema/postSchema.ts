@@ -6,11 +6,11 @@ export const PostSchema = new Schema<Post>({
   user_id: {
     type: Schema.Types.ObjectId,
     ref: 'User',
-    required: true
+    // required: true
   },
   title: {
     type: String,
-    required: true
+    // required: true
   },
   content: {
     type: String,
