@@ -5,7 +5,7 @@ import { Post } from "../entity/types/postInterface";
 
 export const getPostsAllService = async (): Promise<Post[] | undefined> => {
     try {
-        const posts: Post[] = await PostModel.find({})
+        const posts: Post[] = await PostModel.find({}).populate('user_id')
         return posts
     } catch (error) {
         logger.error(error);

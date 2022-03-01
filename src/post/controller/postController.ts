@@ -1,3 +1,4 @@
+import { getPostService } from './../services/getPostService';
 import { createPostService } from '../services/createPostService';
 import { Request, Response } from 'express';
 import { CreatePost, EditPost } from '../entity/types/postInterface';
@@ -9,8 +10,19 @@ import { deletePostService } from '../services/deletePostService';
 
 export const getPosts = async (req: Request, res: Response) => {
     try {
-        const posts = await getPostsAllService();
+        const posts = await getPostsAllService()
         res.status(200).json(posts);
+    } catch (error) {
+        logger.error(error)
+    }
+}
+
+export const getPostById = async (
+    req: Request<{ post_id: string}>, 
+    res: Response) => {
+    try {
+        const post = await getPostService(req.params.post_id)
+        res.status(200).json(post);
     } catch (error) {
         logger.error(error)
     }

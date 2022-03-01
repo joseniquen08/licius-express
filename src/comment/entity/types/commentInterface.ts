@@ -1,10 +1,12 @@
 import { Types } from 'mongoose'
+import { PostIdType } from '../../../post/entity/types/postInterface'
 
 export interface Comment {
     id: CommentIdType;
     description: string;
     createdAt: Date;
     editedAt: Date;
+    post_id: string | PostIdType;
 }
 
 export type CommentIdType = {

@@ -1,5 +1,6 @@
 import { Post } from './../types/postInterface';
 import { Schema } from 'mongoose';
+import { CommentModel } from '../../../comment/entity/models/commentModel';
 
 
 export const PostSchema = new Schema<Post>({
@@ -27,3 +28,18 @@ export const PostSchema = new Schema<Post>({
     type: Date
   }
 });
+
+PostSchema.virtual('comments', {
+  ref: 'Comment',
+  localField: '_id',
+  foreignField: 'post_id'
+} )
+
+PostSchema.pre('deleteOne', async function (next) {
+  const post = this.getFilter();
+  await CommentModel.deleteMany({post_id: post._id});
+  next();
+})
+
+PostSchema.set('toJSON',{ virtuals: true });
+PostSchema.set('toObject', { virtuals: true });

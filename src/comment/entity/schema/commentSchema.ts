@@ -12,5 +12,10 @@ export const CommentSchema = new Schema<Comment>({
     },
     editedAt: {
         type: Date
+    },
+    post_id: {
+        type: Schema.Types.ObjectId,
+        ref: 'Post',
+        required: [true, 'post_id is required'],
     }
 })
