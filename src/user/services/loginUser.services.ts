@@ -1,10 +1,10 @@
 import { ApplicationError } from "../../shared/customErrors/ApplicationError";
-import { signInUser } from "../entity/types/user.types";
+import { SignInUser } from "../entity/types/user.types";
 import { validatePassword } from "../utils/decrypt.utils";
 import { createToken } from "../utils/token.utils";
 import { getUserByEmail } from "./getUserByEmail.services";
 
-export const loginUserService = async (userRequest: signInUser): Promise<string> => {
+export const loginUserService = async (userRequest: SignInUser): Promise<string> => {
   try {
     const user = await getUserByEmail(userRequest.email);
 

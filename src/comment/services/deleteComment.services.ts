@@ -1,6 +1,5 @@
 import { logger } from "../../logger/appLogger"
-import { CommentModel } from "../entity/models/commentModel"
-
+import { CommentModel } from "../entity/models/comment.models"
 
 export const deleteCommentService = async (
     id: string

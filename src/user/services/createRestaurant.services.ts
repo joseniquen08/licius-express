@@ -1,9 +1,9 @@
 import { ApplicationError } from "../../shared/customErrors/ApplicationError";
 import { createAny } from "../../shared/factory/createAny";
 import { RestaurantModel } from '../entity/models/restaurant.models';
-import { IRestaurant, restaurantRequest } from '../entity/types/restaurant.types';
+import { CreateRestaurant, IRestaurant } from '../entity/types/restaurant.types';
 
-export const createRestaurantService = async (restaurantRequest: restaurantRequest): Promise<IRestaurant> => {
+export const createRestaurantService = async (restaurantRequest: CreateRestaurant): Promise<IRestaurant> => {
   try {
     const restaurant = await createAny(RestaurantModel)(restaurantRequest);
     return restaurant as IRestaurant;

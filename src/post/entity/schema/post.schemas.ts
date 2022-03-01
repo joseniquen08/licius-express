@@ -1,17 +1,16 @@
-import { Post } from './../types/postInterface';
 import { Schema } from 'mongoose';
-import { CommentModel } from '../../../comment/entity/models/commentModel';
+import { CommentModel } from '../../../comment/entity/models/comment.models';
+import { IPost } from '../types/post.types';
 
-
-export const PostSchema = new Schema<Post>({
+export const PostSchema = new Schema<IPost>({
   user_id: {
     type: Schema.Types.ObjectId,
     ref: 'User',
-    // required: true
+    required: true
   },
   title: {
     type: String,
-    // required: true
+    required: true
   },
   content: {
     type: String,

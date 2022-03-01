@@ -96,6 +96,7 @@ export const RestaurantSchema = new Schema<IRestaurant>({
     ruc: {
       type: String,
       required: true,
+      unique: true,
     },
     address: {
       type: String,

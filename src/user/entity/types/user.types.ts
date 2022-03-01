@@ -1,7 +1,7 @@
 import { Types } from "mongoose";
 
 export interface IUser {
-  _id: Types.ObjectId;
+  _id: UserIdType;
   email: string;
   password: string;
   role: number;
@@ -32,11 +32,15 @@ export interface ISignRestaurant {
   updated_at: Date;
 }
 
-export type createUser = Omit<IUser, '_id' | 'created_at' | 'updated_at'>;
-export type signUpClient = Omit<ISignClient, 'created_at' | 'updated_at'>;
-export type signUpRestaurant = Omit<ISignRestaurant, 'created_at' | 'updated_at'>;
+export type UserIdType = {
+  _id: Types.ObjectId;
+}
 
-export type signInUser = {
+export type CreateUser = Omit<IUser, '_id' | 'created_at' | 'updated_at'>;
+export type SignUpClient = Omit<ISignClient, 'created_at' | 'updated_at'>;
+export type SignUpRestaurant = Omit<ISignRestaurant, 'created_at' | 'updated_at'>;
+
+export type SignInUser = {
   email: string;
   password: string;
   role: number;

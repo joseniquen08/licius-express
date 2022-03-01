@@ -1,9 +1,9 @@
 import { ApplicationError } from "../../shared/customErrors/ApplicationError";
 import { createAny } from '../../shared/factory/createAny';
 import { ClientModel } from "../entity/models/client.models";
-import { clientRequest, IClient } from '../entity/types/client.types';
+import { CreateClient, IClient } from '../entity/types/client.types';
 
-export const createClientService = async (clientRequest: clientRequest): Promise<IClient> => {
+export const createClientService = async (clientRequest: CreateClient): Promise<IClient> => {
   try {
     const client = await createAny(ClientModel)(clientRequest);
     return client as IClient;
