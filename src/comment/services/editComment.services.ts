@@ -1,7 +1,6 @@
 import { logger } from "../../logger/appLogger";
-import { CommentModel } from "../entity/models/commentModel";
-import { EditComment } from "../entity/types/commentInterface";
-
+import { CommentModel } from "../entity/models/comment.models";
+import { EditComment } from "../entity/types/comment.types";
 
 export const editCommentService = async (
     id: string,

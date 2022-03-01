@@ -44,21 +44,6 @@ export interface IRestaurant {
   locations: Types.DocumentArray<ILocationRestaurant>;
 }
 
-export type restaurantRequest = {
-  _id?: Types.ObjectId;
-  user_id: Types.ObjectId;
-  category_id: number | undefined;
-  profile : {
-    razon_social: string | undefined;
-    ruc: string | undefined;
-    nombre_comercial: string | undefined;
-    description: string | undefined;
-    address?: string;
-    city?: string;
-    country?: string;
-    logo_url?: string;
-    created_at?: Date;
-    updated_at?: Date;
-  },
-  locations?: Types.DocumentArray<ILocationRestaurant>
+export type CreateRestaurant = Omit<IRestaurant, '_id' | 'profile' | 'locations'> & {
+  profile: Omit<IRestaurant['profile'], 'address' | 'city' | 'country' | 'logo_url' | 'created_at' | 'updated_at' >
 }

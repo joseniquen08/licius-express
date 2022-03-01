@@ -1,11 +1,11 @@
 import { NextFunction, Request, Response } from 'express';
-import { signUpClient, signUpRestaurant } from '../entity/types/user.types';
+import { SignUpClient, SignUpRestaurant } from '../entity/types/user.types';
 import { createClientService } from '../services/createClient.services';
 import { createRestaurantService } from '../services/createRestaurant.services';
 import { createUserService } from '../services/createUser.services';
 import { createToken } from '../utils/token.utils';
 
-export const createClient = async (req: Request<{}, {}, signUpClient>, res: Response, next: NextFunction): Promise<void> => {
+export const createClient = async (req: Request<{}, {}, SignUpClient>, res: Response, next: NextFunction): Promise<void> => {
   try {
     const user = await createUserService(req.body);
     const client = await createClientService({
@@ -17,16 +17,16 @@ export const createClient = async (req: Request<{}, {}, signUpClient>, res: Resp
       ...req.body
     });
     const token = createToken({ id: client._id,});
-    res.status(200).header('Authorization', 'Bearer ' + token).json({ success: true });
+    res.status(201).json({ success: true, token, data: { user, client } });
   } catch (error) {
     next(error);
   }
 }
 
-export const createRestaurant = async (req: Request<{}, {}, signUpRestaurant>, res: Response, next: NextFunction): Promise<void> => {
+export const createRestaurant = async (req: Request<{}, {}, SignUpRestaurant>, res: Response, next: NextFunction): Promise<void> => {
   try {
     const user = await createUserService(req.body);
-    const client = await createRestaurantService({
+    const restaurant = await createRestaurantService({
       user_id: user._id,
       profile: {
         razon_social: req.body.razon_social,
@@ -36,8 +36,8 @@ export const createRestaurant = async (req: Request<{}, {}, signUpRestaurant>, r
       },
       ...req.body
     });
-    const token = createToken({ id: client._id,});
-    res.status(200).header('Authorization', 'Bearer ' + token).json({ success: true });
+    const token = createToken({ id: restaurant._id,});
+    res.status(201).json({ success: true, token, data: { user, restaurant } });
   } catch (error) {
     next(error);
   }

@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import express, { Application, NextFunction, Request, Response } from 'express';
-import commentRoutes from './comment/routes/commentRoutes';
-import postRoutes from './post/routes/postRoutes';
+import commentRoutes from './comment/routes/comment.routes';
+import postRoutes from './post/routes/post.routes';
 import userRoutes from './user/routes/user.routes';
 const cors = require('cors');
 
@@ -11,7 +11,7 @@ const app: Application = express();
 
 app.use(express.json());
 
-app.use(cors()); 
+app.use(cors());
 
 app.use(userRoutes);
 app.use(postRoutes);

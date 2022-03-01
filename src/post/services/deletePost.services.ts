@@ -1,5 +1,5 @@
 import { logger } from "../../logger/appLogger"
-import { PostModel } from "../entity/models/postModel"
+import { PostModel } from "../entity/models/post.models"
 
 export const deletePostService = async (
     id: string

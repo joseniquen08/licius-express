@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
-import { PostModel } from '../../../post/entity/models/postModel';
-import { PostSchema } from '../../../post/entity/schema/postSchema';
+import { PostModel } from '../../../post/entity/models/post.models';
 import { IUser } from "../types/user.types";
 
 const Schema = mongoose.Schema;
