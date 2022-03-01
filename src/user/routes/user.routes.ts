@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { loginUser } from "../controllers/userSignIn.controllers";
 import { createClient, createRestaurant } from "../controllers/userSignUp.controllers";
-import { signInUserSchema, signUpClientSchema, signUpRestaurantSchema, userRequestValidator } from "../middlewares/reqValidator.middlewares";
+import { signInUserSchema, signUpClientSchema, signUpRestaurantSchema, userRequestValidator } from "../middlewares/reqUserValidator.middlewares";
 
 const router: Router = Router();
 

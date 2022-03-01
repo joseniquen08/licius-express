@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { logger } from "../../logger/appLogger";
+import { logger } from "../../shared/logger/appLogger";
 import { CreateComment, EditComment } from '../entity/types/comment.types';
 import { createCommentService } from '../services/createComment.services';
 import { deleteCommentService } from '../services/deleteComment.services';

@@ -1,5 +1,5 @@
-import { logger } from '../../logger/appLogger';
 import { createAny } from '../../shared/factory/createAny';
+import { logger } from '../../shared/logger/appLogger';
 import { CommentModel } from '../entity/models/comment.models';
 import { CreateComment, IComment } from '../entity/types/comment.types';
 

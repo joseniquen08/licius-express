@@ -1,4 +1,4 @@
-import { logger } from '../../logger/appLogger';
+import { logger } from '../../shared/logger/appLogger';
 import { CommentModel } from '../entity/models/comment.models';
 import { IComment } from '../entity/types/comment.types';
 

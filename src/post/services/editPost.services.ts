@@ -1,4 +1,4 @@
-import { logger } from "../../logger/appLogger"
+import { logger } from "../../shared/logger/appLogger"
 import { PostModel } from "../entity/models/post.models"
 import { EditPost, IPost } from "../entity/types/post.types"
 

@@ -1,5 +1,5 @@
-import { logger } from "../../logger/appLogger";
 import { createAny } from "../../shared/factory/createAny";
+import { logger } from "../../shared/logger/appLogger";
 import { PostModel } from "../entity/models/post.models";
 import { CreatePost, IPost } from "../entity/types/post.types";
 
