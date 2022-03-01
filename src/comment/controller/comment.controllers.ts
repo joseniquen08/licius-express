@@ -23,8 +23,8 @@ export const getCommentById = async (
   req: Request<{ comment_id: string }>,
   res: Response) => {
   try {
-    const post = await getCommentService(req.params.comment_id);
-    res.status(200).json({ post });
+    const comment = await getCommentService(req.params.comment_id);
+    res.status(200).json({ comment });
   } catch (error) {
     logger.error(error);
   }
@@ -47,10 +47,10 @@ export const editComment = async (
   res: Response
 ) => {
   try {
-    const updateComment = await editCommentService(req.params.comment_id, req.body)
-    res.status(200).json({ data: updateComment })
+    const updateComment = await editCommentService(req.params.comment_id, req.body);
+    res.status(200).json({ data: updateComment });
   } catch (err) {
-    logger.error(err)
+    logger.error(err);
   }
 }
 
@@ -59,9 +59,9 @@ export const deleteComment = async (
   res: Response
 ) => {
   try {
-    const comment = await deleteCommentService(req.params.comment_id)
-    res.status(204).json({ data: comment })
+    await deleteCommentService(req.params.comment_id);
+    res.status(204);
   } catch (err) {
-    logger.error(err)
+    logger.error(err);
   }
 }

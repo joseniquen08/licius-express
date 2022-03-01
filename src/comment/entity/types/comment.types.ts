@@ -5,8 +5,8 @@ import { UserIdType } from '../../../user/entity/types/user.types';
 export interface IComment {
     id: CommentIdType;
     description: string;
-    createdAt: Date;
-    editedAt: Date;
+    created_at: Date;
+    updated_at: Date;
     post_id: string | PostIdType;
     user_id: string | UserIdType;
 }
@@ -15,6 +15,6 @@ export type CommentIdType = {
     _id: Types.ObjectId;
 }
 
-export type CreateComment = Omit<IComment, 'id' | 'createdAt' | 'editedAt'>
+export type CreateComment = Omit<IComment, 'id' | 'created_at' | 'updated_at'>
 
-export type EditComment = Omit<IComment, 'id' | 'createdAt' | 'editedAt'>
+export type EditComment = Omit<IComment, 'id' | 'created_at' | 'updated_at'>

@@ -9,5 +9,6 @@ export const deleteCommentService = async (
         return await CommentModel.deleteOne(query)
     } catch (err) {
         logger.error(err)
+        throw err
     }
 }

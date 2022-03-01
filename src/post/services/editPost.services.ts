@@ -1,7 +1,6 @@
-import { logger } from "../../shared/logger/appLogger"
-import { PostModel } from "../entity/models/post.models"
-import { EditPost, IPost } from "../entity/types/post.types"
-
+import { logger } from "../../shared/logger/appLogger";
+import { PostModel } from "../entity/models/post.models";
+import { EditPost, IPost } from "../entity/types/post.types";
 
 export const editPostService = async (
     id: string,

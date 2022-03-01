@@ -5,13 +5,6 @@ export const CommentSchema = new Schema<IComment>({
   description: {
     type: String
   },
-  createdAt: {
-    type: Date,
-    default: new Date()
-  },
-  editedAt: {
-    type: Date
-  },
   post_id: {
     type: Schema.Types.ObjectId,
     ref: 'Post',
@@ -21,5 +14,10 @@ export const CommentSchema = new Schema<IComment>({
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: [true, 'user_id is required'],
+  },
+}, {
+  timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
   },
 });

@@ -19,13 +19,11 @@ export const PostSchema = new Schema<IPost>({
   attachment_urls: {
     type: [String]
   },
-  created_at: {
-    type: Date,
-    default: new Date()
+}, {
+  timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
   },
-  modified_at: {
-    type: Date
-  }
 });
 
 PostSchema.virtual('comments', {

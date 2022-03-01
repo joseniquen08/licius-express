@@ -44,8 +44,8 @@ export const editPost = async (
   res: Response
 ) => {
   try {
-    const updateEdit = await editPostService(req.params.post_id, req.body)
-    res.status(200).json({ data: updateEdit })
+    const updatePost = await editPostService(req.params.post_id, req.body)
+    res.status(200).json({ data: updatePost })
   } catch (error) {
     logger.error(error)
   }
@@ -56,8 +56,8 @@ export const deletePost = async (
   res: Response
 ) => {
   try {
-    const deletePostById = await deletePostService(req.params.post_id)
-    res.status(204).json(deletePostById)
+    await deletePostService(req.params.post_id);
+    res.status(204);
   } catch (error) {
     logger.error(error)
   }
