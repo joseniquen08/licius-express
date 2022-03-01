@@ -10,4 +10,5 @@ router.post('/user/client/signup', userRequestValidator(signUpClientSchema), cre
 router.post('/user/restaurant/signup', userRequestValidator(signUpRestaurantSchema), createRestaurant);
 router.post('/user/signin', userRequestValidator(signInUserSchema), loginUser);
 
+
 export default router;
