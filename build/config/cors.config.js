@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const whiteList = ['http://localhost:3000', 'http://192.168.252.200:3000'];
+const corsConfig = {
+    origin: (origin, callback) => {
+        if (whiteList.indexOf(origin) !== -1) {
+            callback(null, true);
+        }
+        else {
+            callback(new Error('Not allowed bt CORS'));
+        }
+    }
+};
+exports.default = corsConfig;

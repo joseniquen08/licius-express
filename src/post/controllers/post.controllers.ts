@@ -57,7 +57,7 @@ export const deletePost = async (
 ) => {
   try {
     await deletePostService(req.params.post_id);
-    res.status(204);
+    res.status(204).json({ success: true });
   } catch (error) {
     logger.error(error)
   }
