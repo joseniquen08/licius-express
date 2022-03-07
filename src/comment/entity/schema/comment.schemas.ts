@@ -21,3 +21,9 @@ export const CommentSchema = new Schema<IComment>({
     updatedAt: 'updated_at',
   },
 });
+
+CommentSchema.methods.toJSON = function() {
+  // const { __v, _id, post_id, user_id, created_at, updated_at, ...usuario } = this.toObject();
+  const { description } = this.toObject();
+  return { description };
+}

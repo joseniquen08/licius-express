@@ -1,4 +1,6 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
+import { tokenService } from '../../auth/utils/token.utils';
+import { ApplicationError } from '../../shared/customErrors/ApplicationError';
 import { logger } from "../../shared/logger/appLogger";
 import { CreateComment, EditComment } from '../entity/types/comment.types';
 import { createCommentService } from '../services/createComment.services';
@@ -6,6 +8,8 @@ import { deleteCommentService } from '../services/deleteComment.services';
 import { editCommentService } from '../services/editComment.services';
 import { getCommentService } from '../services/getComment.services';
 import { getCommentsAllService } from '../services/getCommentsAll.services';
+
+const { validateToken, validateRefreshToken } = tokenService;
 
 export const getComments = async (
   req: Request,
@@ -32,13 +36,18 @@ export const getCommentById = async (
 
 export const createComment = async (
   req: Request<{}, {}, CreateComment>,
-  res: Response
+  res: Response,
+  next: NextFunction
 ): Promise<void> => {
   try {
+    const { authorization } = req.headers;
+    if (!authorization) next(new ApplicationError(401, 'No token provided'));
+    validateToken(authorization!);
     const comment = await createCommentService(req.body);
     res.status(201).json({ data: comment });
-  } catch (err) {
-    logger.error(err);
+  } catch (error: any) {
+    next(new ApplicationError(401, `${error.message}`));
+    logger.error(error);
   }
 }
 

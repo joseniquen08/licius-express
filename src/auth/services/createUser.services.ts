@@ -1,8 +1,8 @@
+import { encryptText } from "../../auth/utils/encrypt.utils";
 import { ApplicationError } from "../../shared/customErrors/ApplicationError";
 import { createAny } from "../../shared/factory/createAny";
-import { UserModel } from '../entity/models/user.models';
-import { CreateUser, IUser } from '../entity/types/user.types';
-import { encryptText } from "../utils/encrypt.utils";
+import { UserModel } from '../../user/entity/models/user.models';
+import { CreateUser, IUser } from '../../user/entity/types/user.types';
 
 export const createUserService = async (userRequest: CreateUser): Promise<IUser> => {
   try {
