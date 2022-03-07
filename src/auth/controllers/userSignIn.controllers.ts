@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import { SignInUser } from "../entity/types/user.types";
+import { ApplicationError } from "../../shared/customErrors/ApplicationError";
+import { SignInUser } from "../../user/entity/types/user.types";
 import { loginUserService } from "../services/loginUser.services";
 
 export const loginUser = async (
@@ -10,7 +11,7 @@ export const loginUser = async (
   try {
     const token = await loginUserService(req.body);
     res.status(200).json({ success: true, token });
-  } catch (error) {
-    next(error);
+  } catch (error: any) {
+    next(new ApplicationError(401, `${error.message}`));
   }
 }

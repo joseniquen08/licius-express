@@ -1,7 +1,7 @@
 import { ApplicationError } from "../../shared/customErrors/ApplicationError";
 import { createAny } from "../../shared/factory/createAny";
-import { RestaurantModel } from '../entity/models/restaurant.models';
-import { CreateRestaurant, IRestaurant } from '../entity/types/restaurant.types';
+import { RestaurantModel } from '../../user/entity/models/restaurant.models';
+import { CreateRestaurant, IRestaurant } from '../../user/entity/types/restaurant.types';
 
 export const createRestaurantService = async (restaurantRequest: CreateRestaurant): Promise<IRestaurant> => {
   try {

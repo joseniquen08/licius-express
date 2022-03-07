@@ -1,9 +1,12 @@
 import { NextFunction, Request, Response } from 'express';
-import { SignUpClient, SignUpRestaurant } from '../entity/types/user.types';
+import { ApplicationError } from '../../shared/customErrors/ApplicationError';
+import { SignUpClient, SignUpRestaurant } from '../../user/entity/types/user.types';
 import { createClientService } from '../services/createClient.services';
 import { createRestaurantService } from '../services/createRestaurant.services';
 import { createUserService } from '../services/createUser.services';
-import { createToken } from '../utils/token.utils';
+import { tokenService } from '../utils/token.utils';
+
+const { createToken } = tokenService;
 
 export const createClient = async (req: Request<{}, {}, SignUpClient>, res: Response, next: NextFunction): Promise<void> => {
   try {
@@ -17,9 +20,10 @@ export const createClient = async (req: Request<{}, {}, SignUpClient>, res: Resp
       ...req.body
     });
     const token = createToken({ id: client._id,});
+    // TODO: la data total del usuario no debe ser enviada.
     res.status(201).json({ success: true, token, data: { user, client } });
-  } catch (error) {
-    next(error);
+  } catch (error: any) {
+    next(new ApplicationError(400, error.message));
   }
 }
 
@@ -37,8 +41,9 @@ export const createRestaurant = async (req: Request<{}, {}, SignUpRestaurant>, r
       ...req.body
     });
     const token = createToken({ id: restaurant._id,});
+    // TODO: la data total del restaurante no debe ser enviada.
     res.status(201).json({ success: true, token, data: { user, restaurant } });
-  } catch (error) {
-    next(error);
+  } catch (error: any) {
+    next(new ApplicationError(400, error.message));
   }
 }
