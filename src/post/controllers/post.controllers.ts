@@ -1,4 +1,6 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
+import { tokenService } from '../../auth/utils/token.utils';
+import { ApplicationError } from '../../shared/customErrors/ApplicationError';
 import { logger } from '../../shared/logger/appLogger';
 import { CreatePost, EditPost } from '../entity/types/post.types';
 import { createPostService } from '../services/createPost.services';
@@ -6,6 +8,8 @@ import { deletePostService } from '../services/deletePost.services';
 import { editPostService } from '../services/editPost.services';
 import { getPostService } from '../services/getPost.services';
 import { getPostsAllService } from '../services/getPostsAll.services';
+
+const { validateToken, validateRefreshToken } = tokenService;
 
 export const getPosts = async (req: Request, res: Response) => {
   try {
@@ -29,13 +33,18 @@ export const getPostById = async (
 
 export const createPost = async (
   req: Request<{}, {}, CreatePost>,
-  res: Response
+  res: Response,
+  next: NextFunction
 ): Promise<void> => {
   try {
+    const { authorization } = req.headers;
+    if (!authorization) next(new ApplicationError(401, 'No token provided'));
+    validateToken(authorization!);
     const post = await createPostService(req.body)
     res.status(201).json({ data: post })
-  } catch (error) {
-    logger.error(error)
+  } catch (error: any) {
+    next(new ApplicationError(401, `${error.message}`));
+    logger.error(error);
   }
 }
 
