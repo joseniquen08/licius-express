@@ -1,6 +1,5 @@
 import { Schema } from 'mongoose';
 import { CommentModel } from '../../../comment/entity/models/comment.models';
-import { IComment } from '../../../comment/entity/types/comment.types';
 import { IPost } from '../types/post.types';
 
 export const PostSchema = new Schema<IPost>({
@@ -37,27 +36,29 @@ PostSchema.virtual('comments', {
   localField: '_id',
   foreignField: 'post_id',
   getters: true,
-}).get(async function (this: any) {
-  const comments: any[] = await Promise.all(this.$$populatedVirtuals.comments.map(async (comment: IComment) => {
-    // let name: string = '';
-    // UserModel.findById(comment.user_id, function(error: any, user: IUser) {
-    //   if (user.role === 2) {
-    //     ClientModel.findOne({ user_id: user._id }, function (error: any, client: IClient) {
-    //       const { first_name, last_name } = client.profile;
-    //       name = `${first_name} ${last_name}`;
-    //       console.log(name);
-    //     });
-    //   } else if (user.role === 3) {
-    //     RestaurantModel.findOne({ user_id: user._id }, function (error: any, restaurant: IRestaurant) {
-    //       const { nombre_comercial } = restaurant.profile;
-    //       name = nombre_comercial;
-    //     });
-    //   }
-    // });
-    console.log(comment.description)
-    return await { description: comment.description }
-  }));
-  return comments;
+// }).get(function (this: any) {
+//   const comments: [] = this.$$populatedVirtuals.comments.map((comment: IComment) => {
+//     let name: string = '';
+//     UserModel.findById(comment.user_id, function(error: any, user: IUser) {
+//       console.log(user);
+//       if (user.role === 2) {
+//         ClientModel.findOne({ user_id: user._id }, function (error: any, client: IClient) {
+//           const { first_name, last_name } = client.profile;
+//           name = `${first_name} ${last_name}`;
+//           console.log(name);
+//         });
+//       } else if (user.role === 3) {
+//         RestaurantModel.findOne({ user_id: user._id }, function (error: any, restaurant: IRestaurant) {
+//           const { nombre_comercial } = restaurant.profile;
+//           name = nombre_comercial;
+//         });
+//       }
+//     });
+//     console.log(comment.description)
+//     return { description: comment.description }
+//   });
+//   console.log(comments)
+//   return comments;
 });
 
 PostSchema.pre('deleteOne', async function (next) {

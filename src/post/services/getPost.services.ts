@@ -1,10 +1,12 @@
 import { logger } from "../../shared/logger/appLogger";
 import { PostModel } from "../entity/models/post.models";
 
-export const getPostService = async (id: string) => {
+export const getPostByIdService = async (post_id: string) => {
   try {
-    return await PostModel.findById(id).populate('user_id').populate('comments')
-  } catch (e) {
-    logger.error(e)
+    if (!post_id) throw new Error('invalid post id');
+    return await PostModel.findById(post_id).populate('user_id').populate('comments');
+  } catch (error: any) {
+    logger.error(error)
+    throw new Error(`Error getting post: ${error.message}`);
   }
 }

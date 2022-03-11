@@ -6,7 +6,7 @@ import { CreatePost, EditPost } from '../entity/types/post.types';
 import { createPostService } from '../services/createPost.services';
 import { deletePostService } from '../services/deletePost.services';
 import { editPostService } from '../services/editPost.services';
-import { getPostService } from '../services/getPost.services';
+import { getPostByIdService } from '../services/getPost.services';
 import { getPostsAllService } from '../services/getPostsAll.services';
 
 const { validateToken, validateRefreshToken } = tokenService;
@@ -24,7 +24,7 @@ export const getPostById = async (
   req: Request<{ post_id: string }>,
   res: Response) => {
   try {
-    const post = await getPostService(req.params.post_id)
+    const post = await getPostByIdService(req.params.post_id)
     res.status(200).json({ post });
   } catch (error) {
     logger.error(error)
