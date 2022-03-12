@@ -6,7 +6,7 @@ import { CreateComment, EditComment } from '../entity/types/comment.types';
 import { createCommentService } from '../services/createComment.services';
 import { deleteCommentService } from '../services/deleteComment.services';
 import { editCommentService } from '../services/editComment.services';
-import { getCommentService } from '../services/getComment.services';
+import { getCommentByIdService } from '../services/getCommentById.services';
 import { getCommentsAllService } from '../services/getCommentsAll.services';
 
 const { validateToken, validateRefreshToken } = tokenService;
@@ -27,7 +27,7 @@ export const getCommentById = async (
   req: Request<{ comment_id: string }>,
   res: Response) => {
   try {
-    const comment = await getCommentService(req.params.comment_id);
+    const comment = await getCommentByIdService(req.params.comment_id);
     res.status(200).json({ comment });
   } catch (error) {
     logger.error(error);

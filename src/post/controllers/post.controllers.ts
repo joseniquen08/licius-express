@@ -6,7 +6,7 @@ import { CreatePost, EditPost } from '../entity/types/post.types';
 import { createPostService } from '../services/createPost.services';
 import { deletePostService } from '../services/deletePost.services';
 import { editPostService } from '../services/editPost.services';
-import { getPostByIdService } from '../services/getPost.services';
+import { getPostByIdService } from '../services/getPostById.services';
 import { getPostsAllService } from '../services/getPostsAll.services';
 
 const { validateToken, validateRefreshToken } = tokenService;

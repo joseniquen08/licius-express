@@ -22,7 +22,10 @@ export const CommentSchema = new Schema<IComment>({
   },
 });
 
+// CommentSchema.set();
+
 CommentSchema.methods.toJSON = function() {
   const { description } = this.toObject();
   return { description };
 }
+
