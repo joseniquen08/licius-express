@@ -22,11 +22,14 @@ export const getPosts = async (req: Request, res: Response) => {
 
 export const getPostById = async (
   req: Request<{ post_id: string }>,
-  res: Response) => {
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const post = await getPostByIdService(req.params.post_id)
     res.status(200).json({ post });
-  } catch (error) {
+  } catch (error: any) {
+    next(new ApplicationError(401, `${error.message}`));
     logger.error(error)
   }
 }
