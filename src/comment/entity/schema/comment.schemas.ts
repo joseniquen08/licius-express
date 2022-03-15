@@ -1,7 +1,8 @@
 import { Schema } from "mongoose";
+import { ICommentStaticPopulate } from "../models/comment.models";
 import { IComment } from '../types/comment.types';
 
-export const CommentSchema = new Schema<IComment>({
+export const CommentSchema = new Schema<IComment, ICommentStaticPopulate>({
   description: {
     type: String
   },
@@ -29,3 +30,6 @@ CommentSchema.methods.toJSON = function() {
   return { description };
 }
 
+CommentSchema.statics.findByIdAndPopulate = function(comment_id) {
+  return this.findById(comment_id).populate('user_id');
+}

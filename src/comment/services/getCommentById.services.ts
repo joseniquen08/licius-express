@@ -1,10 +1,14 @@
+import { ApplicationError } from "../../shared/customErrors/ApplicationError";
 import { logger } from "../../shared/logger/appLogger";
 import { CommentModel } from "../entity/models/comment.models";
 
-export const getCommentByIdService = async (id: string) => {
+export const getCommentByIdService = async (comment_id: string) => {
   try {
-    return await CommentModel.findById(id).populate('user_id');
-  } catch (e) {
+    if (!comment_id) throw new Error("invalid comment id");
+    return await CommentModel.findByIdAndPopulate(comment_id)
+  } catch (e: any) {
     logger.error(e);
+    // throw new ApplicationError(403,e.message,e.code === 11000 ? "Error getting Comment by Id: " : "");
+    throw new Error(`Error getting comment: ${e.message}`);
   }
 }

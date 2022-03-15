@@ -8,7 +8,7 @@ export const getPostByIdService = async (post_id: string) => {
     return await PostModel.findAndPopulateById(post_id);
   } catch (error: any) {
     logger.error(error)
-    throw new ApplicationError(403, error.message, error.code === 11000 ? 'Error getting post' : '');
-    // throw new Error(`Error getting post: ${error.message}`);
+    // throw new ApplicationError(403, error.message, error.code === 11000 ? 'Error getting post' : '');
+    throw new Error(`Error getting post: ${error.message}`);
   }
 }
