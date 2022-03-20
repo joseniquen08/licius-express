@@ -2,7 +2,7 @@ import { Types } from "mongoose";
 
 export interface IClient {
   _id: Types.ObjectId;
-  user_id: Types.ObjectId;
+  user_id: string | Types.ObjectId;
   profile: {
     first_name: string;
     last_name: string;

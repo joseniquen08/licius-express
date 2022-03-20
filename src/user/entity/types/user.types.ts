@@ -25,7 +25,7 @@ export interface ISignRestaurant {
   role: number;
   category_id: number;
   razon_social: string;
-  ruc: string;
+  ruc: number;
   nombre_comercial: string;
   description: string;
   created_at: Date;

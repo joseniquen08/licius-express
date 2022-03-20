@@ -25,6 +25,11 @@ export const UserSchema = new Schema<IUser>({
   },
 });
 
+UserSchema.methods.toJSON = function() {
+  const { email, role } = this.toObject();
+  return { email, role };
+}
+
 UserSchema.virtual('posts', {
   ref: 'Post',
   localField: '_id',

@@ -5,9 +5,9 @@ const Schema = mongoose.Schema;
 
 export const ClientSchema = new Schema<IClient>({
   user_id: {
-    type: Schema.Types.ObjectId,
+    type: String,
     ref: 'Client',
-    required: true
+    required: [true, 'is required']
   },
   profile: {
     first_name: {
@@ -40,3 +40,11 @@ export const ClientSchema = new Schema<IClient>({
     updatedAt: 'updated_at',
   },
 });
+
+ClientSchema.methods.toJSON = function() {
+  const { profile } = this.toObject();
+  return { profile };
+}
+
+ClientSchema.set('toJSON',{ virtuals: true });
+ClientSchema.set('toObject', { virtuals: true });

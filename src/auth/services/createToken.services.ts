@@ -4,10 +4,10 @@ import { createRefreshTokenService } from './createRefreshToken.services';
 
 const { createToken } = tokenService;
 
-export const createTokenService = async (userId: string | Types.ObjectId ): Promise<{ authToken: string, refreshToken: string }> => {
+export const createTokenService = async (userId: string | Types.ObjectId, role: number ): Promise<{ authToken: string, refreshToken: string }> => {
   try {
     return {
-      authToken: createToken({ id: userId }),
+      authToken: createToken({ id: userId, role }),
       refreshToken: await createRefreshTokenService(userId)
     }
   } catch (error: any) {

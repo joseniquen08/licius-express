@@ -5,7 +5,7 @@ import commentRoutes from './comment/routes/comment.routes';
 import postRoutes from './post/routes/post.routes';
 // import userRoutes from './user/routes/user.routes';
 
-// const cors = require('cors');
+const cors = require('cors');
 
 dotenv.config();
 
@@ -13,7 +13,7 @@ const app: Application = express();
 
 app.use(express.json());
 
-// app.use(cors());
+app.use(cors());
 
 app.use(authRoutes);
 // app.use(userRoutes);

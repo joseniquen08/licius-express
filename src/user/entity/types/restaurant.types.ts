@@ -32,7 +32,7 @@ export interface IRestaurant {
   profile: {
     nombre_comercial: string;
     razon_social: string;
-    ruc: string;
+    ruc: number;
     address: string;
     city: string;
     country: string;

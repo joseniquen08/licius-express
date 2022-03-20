@@ -6,7 +6,7 @@ import { validateUserService } from "./validateUser.services";
 export const loginUserService = async (userRequest: SignInUser): Promise<TokenResponse> => {
   try {
     const user = await validateUserService(userRequest);
-    return await createTokenService(user._id);
+    return await createTokenService(user._id, user.role);
   } catch (error: any) {
     throw new Error(`Error login user: ${error.message}`);
   }

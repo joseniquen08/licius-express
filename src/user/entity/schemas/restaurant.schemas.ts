@@ -94,7 +94,7 @@ export const RestaurantSchema = new Schema<IRestaurant>({
       required: true,
     },
     ruc: {
-      type: String,
+      type: Number,
       required: true,
       unique: true,
     },
@@ -124,3 +124,11 @@ export const RestaurantSchema = new Schema<IRestaurant>({
     updatedAt: 'updated_at',
   },
 });
+
+RestaurantSchema.methods.toJSON = function() {
+  const { profile, category_id } = this.toObject();
+  return { profile, category_id };
+}
+
+RestaurantSchema.set('toJSON',{ virtuals: true });
+RestaurantSchema.set('toObject', { virtuals: true });
