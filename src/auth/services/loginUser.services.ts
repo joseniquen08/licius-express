@@ -8,6 +8,6 @@ export const loginUserService = async (userRequest: SignInUser): Promise<TokenRe
     const user = await validateUserService(userRequest);
     return await createTokenService(user._id, user.role);
   } catch (error: any) {
-    throw new Error(`Error login user: ${error.message}`);
+    throw new Error(`${error.message}`);
   }
 }

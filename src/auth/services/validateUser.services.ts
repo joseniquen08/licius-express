@@ -10,6 +10,6 @@ export const validateUserService = async (userRequest: SignInUser): Promise<IUse
     if (!auth) throw new Error('password is incorrect');
     return user;
   } catch (error: any) {
-    throw new Error(`Error validating user credentials: ${error.message}`);
+    throw new Error(`${error.message}`);
   }
 }
