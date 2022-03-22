@@ -4,7 +4,7 @@ import { validatePassword } from "../utils/decrypt.utils";
 
 export const validateUserService = async (userRequest: SignInUser): Promise<IUser> => {
   try {
-    const user = await getUserByEmail(userRequest.email);
+    const user = await getUserByEmail(userRequest.email, userRequest.role);
     if (!user) throw new Error('email not found');
     const auth = validatePassword(userRequest.password, user.password);
     if (!auth) throw new Error('password is incorrect');

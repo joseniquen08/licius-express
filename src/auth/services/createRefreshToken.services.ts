@@ -1,10 +1,10 @@
-import { Types } from "mongoose";
+import { UserIdType } from '../../user/entity/types/user.types';
 import { TokenModel } from "../entity/models/token.models";
 import { tokenService } from "../utils/token.utils";
 
 const { createRefreshToken } = tokenService;
 
-export const createRefreshTokenService = async ( userId: string | Types.ObjectId ): Promise<string> => {
+export const createRefreshTokenService = async ( userId: string | UserIdType ): Promise<string> => {
   try {
     const refreshToken = createRefreshToken({ id: userId });
     const token = new TokenModel({

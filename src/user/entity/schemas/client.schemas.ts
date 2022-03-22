@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 
 export const ClientSchema = new Schema<IClient>({
   user_id: {
-    type: String,
+    type: Schema.Types.ObjectId,
     ref: 'Client',
     required: [true, 'is required']
   },

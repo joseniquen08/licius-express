@@ -5,6 +5,7 @@ export interface IPost {
   title: string;
   content: string;
   attachment_urls: Types.Array<string>;
+  is_promoted: boolean;
   created_at: Date;
   updated_at: Date;
   user_id: string | Types.ObjectId;
