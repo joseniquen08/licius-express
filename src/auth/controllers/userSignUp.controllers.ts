@@ -11,7 +11,7 @@ const { createToken } = tokenService;
 export const createClient = async (req: Request<{}, {}, SignUpClient>, res: Response, next: NextFunction): Promise<void> => {
   try {
     const user = await createUserService(req.body);
-    const client = await createClientService({
+    const token = await createClientService({
       user_id: user._id,
       profile: {
         first_name: req.body.first_name,
@@ -19,9 +19,7 @@ export const createClient = async (req: Request<{}, {}, SignUpClient>, res: Resp
       },
       ...req.body
     });
-    const token = createToken({ id: client._id,});
-    // TODO: la data total del usuario no debe ser enviada.
-    res.status(201).json({ success: true, token, data: { user, client } });
+    res.status(201).json({ success: true, token });
   } catch (error: any) {
     next(new ApplicationError(400, error.message));
   }
@@ -30,7 +28,7 @@ export const createClient = async (req: Request<{}, {}, SignUpClient>, res: Resp
 export const createRestaurant = async (req: Request<{}, {}, SignUpRestaurant>, res: Response, next: NextFunction): Promise<void> => {
   try {
     const user = await createUserService(req.body);
-    const restaurant = await createRestaurantService({
+    const token = await createRestaurantService({
       user_id: user._id,
       profile: {
         razon_social: req.body.razon_social,
@@ -40,9 +38,7 @@ export const createRestaurant = async (req: Request<{}, {}, SignUpRestaurant>, r
       },
       ...req.body
     });
-    const token = createToken({ id: restaurant._id,});
-    // TODO: la data total del restaurante no debe ser enviada.
-    res.status(201).json({ success: true, token, data: { user, restaurant } });
+    res.status(201).json({ success: true, token });
   } catch (error: any) {
     next(new ApplicationError(400, error.message));
   }
