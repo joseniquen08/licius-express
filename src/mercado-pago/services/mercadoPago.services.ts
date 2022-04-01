@@ -1,6 +1,6 @@
 import mercadopago from 'mercadopago';
 import { PreferenceCreateResponse } from 'mercadopago/resources/preferences';
-import { CreatePreference } from '../entity/types/mercadoPago.types';
+import { CreatePayment, CreatePreference } from '../entity/types/mercadoPago.types';
 
 export const createPreferencePostService = async (preferenceRequest: CreatePreference): Promise<PreferenceCreateResponse> => {
   try {
@@ -23,5 +23,13 @@ export const createPreferencePostService = async (preferenceRequest: CreatePrefe
     return await mercadopago.preferences.create(preference);
   } catch (error: any) {
     throw new Error(`Error mercadopago: ${error.message}`);
+  }
+}
+
+export const createPaymentService = async (paymentRequest: CreatePayment): Promise<void> => {
+  try {
+    
+  } catch (error: any) {
+    throw new Error(`Error payment: ${error.message}`);
   }
 }
