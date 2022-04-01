@@ -7,7 +7,7 @@ import { CreatePayment, CreatePreference } from '../entity/types/mercadoPago.typ
 export const createPreferencePostService = async (preferenceRequest: CreatePreference): Promise<PreferenceCreateResponse> => {
   try {
     mercadopago.configure({
-      access_token: 'TEST-6925005769155675-033021-3250279145a7baaed946e61bfd0cdcd0-606600073'
+      access_token: `${process.env.MERCADO_PAGO_ACCESS_TOKEN}`,
     });
 
     let preference = {
@@ -19,7 +19,7 @@ export const createPreferencePostService = async (preferenceRequest: CreatePrefe
         },
       ],
       back_urls: {
-        "success": "http://localhost:3000/restaurante/post/checkout/redirect",
+        "success": `${process.env.CLIENT_URI}/restaurante/post/checkout/redirect`,
       }
     };
     return await mercadopago.preferences.create(preference);
