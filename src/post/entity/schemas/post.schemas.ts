@@ -33,8 +33,8 @@ export const PostSchema = new Schema<IPost, IPostTwo>({
 });
 
 PostSchema.methods.toJSON = function() {
-  const { title, content, attachment_urls, is_promoted, comments } = this.toObject();
-  return { title, content, attachment_urls, is_promoted, comments };
+  const { id, title, content, attachment_urls, is_promoted, comments } = this.toObject();
+  return { id, title, content, attachment_urls, is_promoted, comments };
 }
 
 PostSchema.statics.findAndPopulateById = function(post_id) {

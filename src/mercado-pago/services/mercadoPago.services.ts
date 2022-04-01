@@ -1,5 +1,7 @@
 import mercadopago from 'mercadopago';
 import { PreferenceCreateResponse } from 'mercadopago/resources/preferences';
+import { createAny } from '../../shared/factory/createAny';
+import { PaymentSuccessModel } from '../entity/models/mercadoPago.models';
 import { CreatePayment, CreatePreference } from '../entity/types/mercadoPago.types';
 
 export const createPreferencePostService = async (preferenceRequest: CreatePreference): Promise<PreferenceCreateResponse> => {
@@ -28,7 +30,7 @@ export const createPreferencePostService = async (preferenceRequest: CreatePrefe
 
 export const createPaymentService = async (paymentRequest: CreatePayment): Promise<void> => {
   try {
-    
+    await createAny(PaymentSuccessModel)(paymentRequest);
   } catch (error: any) {
     throw new Error(`Error payment: ${error.message}`);
   }

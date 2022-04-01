@@ -1,5 +1,4 @@
-import { Types } from "mongoose";
-import { CreatePost } from '../../../post/entity/types/post.types';
+import { CreatePost, PostIdType } from '../../../post/entity/types/post.types';
 
 export interface IMercadoPago {
   title: string;
@@ -10,7 +9,7 @@ export interface IMercadoPago {
 }
 
 export interface IPaymentSuccess {
-  post_id: Types.ObjectId;
+  post_id: PostIdType;
   payment_id: number;
   payment_type: string;
   merchant_order_id: number;
