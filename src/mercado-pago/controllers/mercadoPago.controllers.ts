@@ -20,7 +20,8 @@ export const savePaymentPost = async(req: Request<{}, {}, CreatePaymentWithoutPo
       title: req.body.title,
       content: req.body.content,
       attachment_urls: req.body.attachment_urls,
-      user_id: req.body.user_id
+      user_id: req.body.user_id,
+      is_promoted: true
     });
     await createPaymentService({
       post_id: post.id,
