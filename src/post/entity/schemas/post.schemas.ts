@@ -1,10 +1,10 @@
 import { Schema } from 'mongoose';
 import { CommentModel } from '../../../comment/entity/models/comment.models';
 import { IComment } from '../../../comment/entity/types/comment.types';
-import { PostModelTwo } from '../models/post.models';
+import { IPostTwo } from '../models/post.models';
 import { IPost } from '../types/post.types';
 
-export const PostSchema = new Schema<IPost, PostModelTwo>({
+export const PostSchema = new Schema<IPost, IPostTwo>({
   user_id: {
     type: Schema.Types.ObjectId,
     ref: 'User',
@@ -21,6 +21,10 @@ export const PostSchema = new Schema<IPost, PostModelTwo>({
   attachment_urls: {
     type: [String]
   },
+  is_promoted: {
+    type: Boolean,
+    default: false
+  }
 }, {
   timestamps: {
     createdAt: 'created_at',
@@ -29,8 +33,8 @@ export const PostSchema = new Schema<IPost, PostModelTwo>({
 });
 
 PostSchema.methods.toJSON = function() {
-  const { title, content, attachment_urls, comments } = this.toObject();
-  return { title, content, attachment_urls, comments };
+  const { id, title, content, attachment_urls, is_promoted, comments } = this.toObject();
+  return { id, title, content, attachment_urls, is_promoted, comments };
 }
 
 PostSchema.statics.findAndPopulateById = function(post_id) {
@@ -43,13 +47,16 @@ PostSchema.virtual('comments', {
   foreignField: 'post_id',
   getters: true,
 }).get(function (this: any) {
-  const comments: [] = this.$$populatedVirtuals.comments.map((comment: IComment) => {
-    return {
-      user_id: comment.user_id,
-      description: comment.description
-    };
-  });
-  return comments;
+  if (this.$$populatedVirtuals){
+    const comments: [] = this.$$populatedVirtuals.comments.map((comment: IComment) => {
+      return {
+        user_id: comment.user_id,
+        description: comment.description
+      };
+    });
+    return comments;
+  }
+  return [];
 });
 
 PostSchema.pre('deleteOne', async function (next) {

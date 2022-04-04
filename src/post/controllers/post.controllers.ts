@@ -43,8 +43,8 @@ export const createPost = async (
     const { authorization } = req.headers;
     if (!authorization) next(new ApplicationError(401, 'No token provided'));
     validateToken(authorization!);
-    const post = await createPostService(req.body)
-    res.status(201).json({ data: post })
+    const post = await createPostService(req.body);
+    res.status(201).json({ data: post });
   } catch (error: any) {
     next(new ApplicationError(401, `${error.message}`));
     logger.error(error);

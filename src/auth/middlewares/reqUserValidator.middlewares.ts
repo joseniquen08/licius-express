@@ -26,7 +26,8 @@ export const signUpRestaurantSchema = yup.object({
 export const signInUserSchema = yup.object({
   body: yup.object({
     email: yup.string().email('Invalid email.').required('Email is required'),
-    password: yup.string().min(8, 'Min length is 8').required('Password is required.')
+    password: yup.string().min(8, 'Min length is 8').required('Password is required.'),
+    role: yup.number().max(4).positive().required('Role is required'),
   })
 });
 
@@ -37,6 +38,6 @@ export const userRequestValidator = (schema: any) => async (req: Request, res: R
     });
     next();
   } catch (error: any) {
-    next(new ApplicationError(403, error, 'validation'));
+    next(new ApplicationError(400, error, 'validation'));
   }
 }
