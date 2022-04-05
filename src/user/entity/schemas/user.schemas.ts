@@ -30,6 +30,10 @@ UserSchema.methods.toJSON = function() {
   return { email, role };
 }
 
+// UserSchema.virtual('user_client', {
+//   ref: 'Client'
+// });
+
 UserSchema.virtual('posts', {
   ref: 'Post',
   localField: '_id',

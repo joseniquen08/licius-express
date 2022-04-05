@@ -5,7 +5,7 @@ import { IPost } from "../entity/types/post.types";
 
 export const getPostsAllService = async (): Promise<IPost[] | undefined> => {
     try {
-        const posts: IPost[] = await PostModel.find({}).populate('user_id')
+        const posts: IPost[] = await PostModel.find({}).populate('user');
         return posts
     } catch (error) {
         logger.error(error);

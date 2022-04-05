@@ -1,7 +1,7 @@
 import FormData from 'form-data';
 import Mailgun from 'mailgun.js';
 import { logger } from '../../shared/logger/appLogger';
-import {mailConfig, mailDomain} from './mailConfig';
+import { mailConfig, mailDomain } from './mailConfig';
 
 const mailgun = new Mailgun(FormData);
 
@@ -17,18 +17,18 @@ Template Name: 'checkout_confirmation_template' ---> Está almacenado dentro de 
 
 Request Structure
 {
-            "recipientData": {
-                "recipientFirstName": "xxxx",
-                "recipientEmail": "xxx@gmail.com",
-                "orderNumber": "12313123",
-                "billingAmmount": "S/130",
-                "beginDate": "04 Mar 2022",
-                "endDate": "10 Mar 2022"
-            },
-            "message": {
-              "text"  : "Tu compra ha sido procesada satisfactoriamente"
-            },
-            "attachment": ""
+  "recipientData": {
+      "recipientFirstName": "xxxx",
+      "recipientEmail": "xxx@gmail.com",
+      "orderNumber": "12313123",
+      "billingAmmount": "S/130",
+      "beginDate": "04 Mar 2022",
+      "endDate": "10 Mar 2022"
+  },
+  "message": {
+    "text"  : "Tu compra ha sido procesada satisfactoriamente"
+  },
+  "attachment": ""
 }
 
 */

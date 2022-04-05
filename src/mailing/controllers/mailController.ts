@@ -7,7 +7,7 @@ export const sendMail = async (req: Request, res: Response, next: NextFunction) 
   try {
     await sendMailService(recipientData, message, attachment);
     res.json({message: `Email enviado con éxito a ${ recipientData.recipientEmail}`});
-    await next();
+    next();
   } catch (error: any) {
     logger.error(error)
     throw new Error(`Error mailing: ${error.message}`);
