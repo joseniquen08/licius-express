@@ -21,7 +21,7 @@ Request Structure
                 "recipientFirstName": "xxxx",
                 "recipientEmail": "xxx@gmail.com",
                 "orderNumber": "12313123",
-                "billingAmmount": "S/130",
+                "billingAmount": "S/130",
                 "beginDate": "04 Mar 2022",
                 "endDate": "10 Mar 2022"
             },
@@ -39,7 +39,7 @@ export const sendMailService = async (recipientData: any, message: any, attachme
       recipientFirstName,
       recipientEmail,
       orderNumber,
-      billingAmmount,
+      billingAmount,
       beginDate,
       endDate,
     } = recipientData
@@ -52,7 +52,7 @@ export const sendMailService = async (recipientData: any, message: any, attachme
       template: 'checkout_confirmation_template',
       'h:X-Mailgun-Variables': JSON.stringify({ // be sure to stringify your payload
         orderNumber,
-        billingAmmount,
+        billingAmount,
         beginDate,
         endDate,
       }),

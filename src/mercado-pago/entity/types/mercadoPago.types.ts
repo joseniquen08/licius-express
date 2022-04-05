@@ -14,6 +14,11 @@ export interface IPaymentSuccess {
   payment_type: string;
   merchant_order_id: number;
   status: boolean;
+  begin_date: Date;
+  unit_price: number;
+  quantity: number;
+  total_amount: number;
+  end_date: Date;
   expire_at: Date;
   created_at: Date;
   updated_at: Date;
