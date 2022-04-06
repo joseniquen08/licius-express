@@ -1,8 +1,9 @@
-import { NextFunction, Request, Response } from 'express';
+import { json, NextFunction, Request, Response } from 'express';
+import { getAllPostsService } from '../services/getAllPosts.services';
 import { tokenService } from '../../auth/utils/token.utils';
 import { ApplicationError } from '../../shared/customErrors/ApplicationError';
 import { logger } from '../../shared/logger/appLogger';
-import { CreatePost, EditPost } from '../entity/types/post.types';
+import { CreatePost, EditPost, IGetPost } from '../entity/types/post.types';
 import { createPostService } from '../services/createPost.services';
 import { deletePostService } from '../services/deletePost.services';
 import { editPostService } from '../services/editPost.services';
@@ -14,6 +15,15 @@ const { validateToken, validateRefreshToken } = tokenService;
 export const getPosts = async (req: Request, res: Response) => {
   try {
     const posts = await getPostsAllService()
+    res.status(200).json(posts);
+  } catch (error) {
+    logger.error(error)
+  }
+}
+
+export const getAllPosts = async (req: Request, res: Response) => {
+  try {
+    const posts: IGetPost[] | undefined = await getAllPostsService()
     res.status(200).json(posts);
   } catch (error) {
     logger.error(error)
