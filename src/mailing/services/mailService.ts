@@ -46,7 +46,7 @@ export const sendMailService = async (recipientData: any, message: any, attachme
     const data = {
       from: 'Miguel de Licius <info@licius.pe>',
       to: recipientEmail,
-      subject: `${recipientFirstName}! Tu compra fue un éxito &#128285`,
+      subject: `${recipientFirstName}! Tu compra fue un éxito`,
       text: message.text,
       inline: attachment,
       template: 'checkout_confirmation_template',
