@@ -1,8 +1,8 @@
 import { Schema } from 'mongoose';
 import { CommentModel } from '../../../comment/entity/models/comment.models';
 import { IComment } from '../../../comment/entity/types/comment.types';
-import { ClientModel } from '../../../user/entity/models/client.models';
 import { IClient } from '../../../user/entity/types/client.types';
+import { IRestaurant } from '../../../user/entity/types/restaurant.types';
 import { IUser } from '../../../user/entity/types/user.types';
 import { IPostTwo } from '../models/post.models';
 import { IPost } from '../types/post.types';
@@ -36,8 +36,8 @@ export const PostSchema = new Schema<IPost, IPostTwo>({
 });
 
 PostSchema.methods.toJSON = function() {
-  const { id, title, content, attachment_urls, is_promoted, comments, user } = this.toObject();
-  return { id, title, content, attachment_urls, is_promoted, comments, user };
+  const { id, title, content, attachment_urls, is_promoted, comments, user, client, restaurant } = this.toObject();
+  return { id, title, content, attachment_urls, is_promoted, comments, user, client, restaurant };
 }
 
 PostSchema.statics.findAndPopulateById = function(post_id) {
@@ -50,7 +50,7 @@ PostSchema.virtual('comments', {
   foreignField: 'post_id',
   getters: true,
 }).get(function (this: any) {
-  if (this.$$populatedVirtuals){
+  if (this.$$populatedVirtuals.commments){
     const comments: [] = this.$$populatedVirtuals.comments.map((comment: IComment) => {
       return {
         user_id: comment.user_id,
@@ -69,20 +69,42 @@ PostSchema.virtual('user', {
   getters: true,
 }).get(function (this: any) {
   const user: IUser = this.$$populatedVirtuals.user[0];
-  if (user.role === 2) {
-    let response = {};
-    ClientModel.findOne({ user_id: user._id }, function (err: any, client: IClient) {
-      if (err) {
-        console.log(err);
-      } else {
-        return {
-          email: user.email,
-          role: user.role,
-          first_name: client.profile.first_name,
-        };
-      }
-    });
+  return {
+    email: user.email,
+    role: user.role,
+  };
+});
+
+PostSchema.virtual('client', {
+  ref: 'Client',
+  localField: 'user_id',
+  foreignField: 'user_id',
+  getters: true,
+}).get(function (this: any) {
+  if (this.$$populatedVirtuals.client.length !== 0){
+    const client: IClient = this.$$populatedVirtuals.client[0];
+    return {
+      first_name: client.profile.first_name,
+      last_name: client.profile.last_name,
+    }
   }
+  return {};
+});
+
+PostSchema.virtual('restaurant', {
+  ref: 'Restaurant',
+  localField: 'user_id',
+  foreignField: 'user_id',
+  getters: true,
+}).get(function (this: any) {
+  if (this.$$populatedVirtuals.restaurant.length !== 0){
+    const restaurant: IRestaurant = this.$$populatedVirtuals.restaurant[0];
+    return {
+      nombre_comercial: restaurant.profile.nombre_comercial,
+      description: restaurant.profile.description,
+    }
+  }
+  return {};
 });
 
 PostSchema.pre('deleteOne', async function (next) {

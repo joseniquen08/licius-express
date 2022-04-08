@@ -11,11 +11,12 @@ import { getPostsAllService } from '../services/getPostsAll.services';
 
 const { validateToken, validateRefreshToken } = tokenService;
 
-export const getPosts = async (req: Request, res: Response) => {
+export const getPosts = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const posts = await getPostsAllService()
     res.status(200).json(posts);
-  } catch (error) {
+  } catch (error: any) {
+    next(new ApplicationError(401, `${error.message}`));
     logger.error(error)
   }
 }

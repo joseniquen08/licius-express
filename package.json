@@ -38,6 +38,7 @@
     "jsonwebtoken": "^8.5.1",
     "mailgun.js": "^5.0.5",
     "mercadopago": "^1.5.12",
+    "moment": "^2.29.2",
     "mongodb-memory-server-core": "^8.4.1",
     "mongoose": "^6.2.1",
     "winston": "^3.6.0",
