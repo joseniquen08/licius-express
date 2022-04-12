@@ -20,7 +20,7 @@ export const sendMailService = async (recipientData: any, message: any, attachme
     const data = {
       from: 'Miguel de Licius <info@licius.pe>',
       to: recipientEmail,
-      subject: `${recipientFirstName}! Tu compra fue un éxito &#128285`,
+      subject: `${recipientFirstName}! Tu compra fue un éxito :D`,
       text: message.text,
       inline: attachment,
       template: 'checkout_confirmation_template',
@@ -31,8 +31,7 @@ export const sendMailService = async (recipientData: any, message: any, attachme
         endDate,
       }),
     };
-    const msg = await mg.messages.create(mailDomain.domain,data)
-    console.log(msg)
+    const msg = await mg.messages.create(mailDomain.domain,data);
   } catch (error: any) {
     logger.error(error);
     throw new Error(`Error sending email: ${error.message}`);

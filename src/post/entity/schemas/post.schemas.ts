@@ -84,8 +84,7 @@ PostSchema.virtual('client', {
   if (this.$$populatedVirtuals.client.length !== 0){
     const client: IClient = this.$$populatedVirtuals.client[0];
     return {
-      first_name: client.profile.first_name,
-      last_name: client.profile.last_name,
+      full_name: `${client.profile.first_name} ${client.profile.last_name}`,
     }
   }
   return {};

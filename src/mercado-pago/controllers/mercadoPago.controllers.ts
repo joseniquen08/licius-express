@@ -52,22 +52,17 @@ export const savePaymentPost = async(req: Request<{}, {}, CreatePaymentWithoutPo
       quantity,
       total_amount,
     });
-    // total_ammount
-    //begin_date end_date
-    await sendMailService(
-      {
+
+    await sendMailService({
         recipientFirstName,
         recipientEmail,
         orderNumber: payment_id,
-        billingAmount: total_amount,
+        billingAmount: unit_price * quantity,
         beginDate: moment(begin_date).format('ll'),
         endDate: moment(end_date).format('ll'),
-      },
-      {
+      },{
         text  : "Tu compra ha sido procesada satisfactoriamente"
-      },
-      "",
-    );
+      },"",);
     res.status(201).json({ status: 'success' });
   } catch (error: any) {
     next(new ApplicationError(400, error.message));

@@ -1,9 +1,7 @@
-import { Model, Schema } from 'mongoose';
-import { number } from 'yup';
-import { IPaymentSuccessTwo } from '../models/mercadoPago.models';
-import { IMercadoPago, IPaymentSuccess } from '../types/mercadoPago.types';
+import { Schema } from 'mongoose';
+import { IPaymentSuccess } from '../types/mercadoPago.types';
 
-export const PaymentSuccessSchema = new Schema<IPaymentSuccess, Model<IPaymentSuccess, {}, IPaymentSuccessTwo>>({
+export const PaymentSuccessSchema = new Schema<IPaymentSuccess>({
   post_id: {
     type: Schema.Types.ObjectId,
     required: true,
@@ -43,18 +41,10 @@ export const PaymentSuccessSchema = new Schema<IPaymentSuccess, Model<IPaymentSu
   quantity: {
     type:Number,
     required: true,
-  }
-  // expire_at: {
-  //   type: Date,
-  //   default: new Date(),
-  // },
+  },
 }, {
   timestamps: {
     createdAt: 'created_at',
     updatedAt: 'updatet_at',
-  }
+  },
 });
-
-// PaymentSuccessSchema.methods.assingExpireAt = function (seconds: number) {
-//   this.schema.index({ expire_at: 1 }, { expire: seconds });
-// }
