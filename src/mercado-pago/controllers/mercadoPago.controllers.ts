@@ -1,13 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
+import moment from 'moment';
 import { sendMailService } from '../../mailing/services/mailService';
 import { IPost } from '../../post/entity/types/post.types';
 import { createPostService } from '../../post/services/createPost.services';
 import { ApplicationError } from '../../shared/customErrors/ApplicationError';
+import { getRestaurantById } from '../../user/services/getRestaurantById.services';
+import { getUserById } from '../../user/services/getUserById.services';
 import { CreatePaymentWithoutPostId, CreatePreference } from '../entity/types/mercadoPago.types';
 import { createPaymentService, createPreferencePostService } from '../services/mercadoPago.services';
-import {getRestaurantById} from '../../user/services/getRestaurantById.services'
-import { getUserById } from '../../user/services/getUserById.services';
-import moment from 'moment';
 
 export const createPreferencePost = async(req: Request<{}, {}, CreatePreference>, res: Response, next: NextFunction) => {
   try {
@@ -40,7 +40,6 @@ export const savePaymentPost = async(req: Request<{}, {}, CreatePaymentWithoutPo
       user_id,
       is_promoted: true
     });
-    
     await createPaymentService({
       post_id: post.id,
       payment_id,
@@ -52,22 +51,17 @@ export const savePaymentPost = async(req: Request<{}, {}, CreatePaymentWithoutPo
       quantity,
       total_amount,
     });
-    // total_ammount
-    //begin_date end_date
-    await sendMailService(
-      {
+
+    await sendMailService({
         recipientFirstName,
         recipientEmail,
         orderNumber: payment_id,
-        billingAmount: total_amount,
+        billingAmount: unit_price * quantity,
         beginDate: moment(begin_date).format('ll'),
         endDate: moment(end_date).format('ll'),
-      },
-      {
+      },{
         text  : "Tu compra ha sido procesada satisfactoriamente"
-      },
-      "",  
-    );
+      },"",);
     res.status(201).json({ status: 'success' });
   } catch (error: any) {
     next(new ApplicationError(400, error.message));
