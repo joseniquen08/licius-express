@@ -37,7 +37,7 @@ export interface IRestaurant {
     city: string;
     country: string;
     description: string;
-    logo_url: string;
+    image_url: string;
     created_at: Date;
     updated_at: Date;
   }
@@ -45,5 +45,5 @@ export interface IRestaurant {
 }
 
 export type CreateRestaurant = Omit<IRestaurant, '_id' | 'profile' | 'locations'> & {
-  profile: Omit<IRestaurant['profile'], 'address' | 'city' | 'country' | 'logo_url' | 'created_at' | 'updated_at' >
+  profile: Omit<IRestaurant['profile'], 'address' | 'city' | 'country' | 'image_url' | 'created_at' | 'updated_at' >
 }

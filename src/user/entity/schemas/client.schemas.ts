@@ -33,6 +33,10 @@ export const ClientSchema = new Schema<IClient>({
     description: {
       type: String
     },
+    image_url: {
+      type: String,
+      default: '',
+    }
   },
 }, {
   timestamps: {

@@ -85,6 +85,7 @@ PostSchema.virtual('client', {
     const client: IClient = this.$$populatedVirtuals.client[0];
     return {
       full_name: `${client.profile.first_name} ${client.profile.last_name}`,
+      image_url: client.profile.image_url,
     }
   }
   return {};
@@ -101,6 +102,7 @@ PostSchema.virtual('restaurant', {
     return {
       nombre_comercial: restaurant.profile.nombre_comercial,
       description: restaurant.profile.description,
+      image_url: restaurant.profile.image_url,
     }
   }
   return {};

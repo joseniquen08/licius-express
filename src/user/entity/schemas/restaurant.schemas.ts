@@ -111,8 +111,9 @@ export const RestaurantSchema = new Schema<IRestaurant>({
       type: String,
       required: true,
     },
-    logo_url: {
+    image_url: {
       type: String,
+      default: '',
     },
   },
   locations: {
