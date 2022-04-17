@@ -5,7 +5,8 @@ import authRoutes from './auth/routes/auth.routes';
 import commentRoutes from './comment/routes/comment.routes';
 import mercadoPagoRoutes from './mercado-pago/routes/mercadoPago.routes';
 import postRoutes from './post/routes/post.routes';
-import mailRoutes from './mailing/routes/mailRoutes'
+import mailRoutes from './mailing/routes/mailRoutes';
+import categoryRoutes from './category/routes/categoryRoutes'
 // import userRoutes from './user/routes/user.routes';
 
 dotenv.config();
@@ -22,6 +23,7 @@ app.use(postRoutes);
 app.use(commentRoutes);
 app.use(mercadoPagoRoutes);
 app.use(mailRoutes);
+app.use(categoryRoutes);
 
 app.use(function (err: any, req: Request, res: Response, next: NextFunction) {
   res.status(err.status ? err.status : 500).send({ message: err.message, type: err.type });

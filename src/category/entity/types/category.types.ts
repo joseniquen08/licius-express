@@ -11,3 +11,7 @@ export interface ICategory {
 export type CategoryIdType = {
   _id: Types.ObjectId;
 }
+
+export type CreateCategory = Omit<ICategory, 'id'| 'created_at'| 'modified_at'>
+
+export type EditCategory = Omit<ICategory, 'id'| 'created_at'| 'modified_at'>
