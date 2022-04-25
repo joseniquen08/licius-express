@@ -3,9 +3,9 @@ import dotenv from 'dotenv';
 import express, { Application, NextFunction, Request, Response } from 'express';
 import authRoutes from './auth/routes/auth.routes';
 import commentRoutes from './comment/routes/comment.routes';
+import mailRoutes from './mailing/routes/mailRoutes';
 import mercadoPagoRoutes from './mercado-pago/routes/mercadoPago.routes';
 import postRoutes from './post/routes/post.routes';
-import mailRoutes from './mailing/routes/mailRoutes'
 // import userRoutes from './user/routes/user.routes';
 
 dotenv.config();

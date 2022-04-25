@@ -1,5 +1,8 @@
 import app from './app';
+import cloudinaryConfig from './config/cloudinary.config';
 import { mongooseConnection } from './config/mongoose.config';
+
+cloudinaryConfig();
 
 mongooseConnection(`${process.env.MONGO_URI}`);
 
